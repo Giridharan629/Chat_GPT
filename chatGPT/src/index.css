@@ -1,0 +1,50 @@
+:root {
+  --background: #7f6a51;
+  --border: 1px solid #614f41;
+  --main-background: #cdc1b1;
+  --font-color: #ffffff;
+
+  --theme1-background: #7f6a51;
+  --theme1-border: 1px solid #614f41;
+  --theme1-main-background: #cdc1b1;
+  --theme1-font-color: #ffffff;
+
+  --theme2-background: #ffaed1;
+  --theme2-border: 1px solid #f26bac;
+  --theme2-main-background: #ffdbec;
+  --theme2-font-color: #000000;
+
+  --theme3-background: rgb(55, 0, 90);
+  --theme3-border: 1px solid rgba(219, 111, 255, 0.34);
+  --theme3-main-background: rgb(76, 0, 124);
+  --theme3-font-color: #fff;
+}
+
+/* brown */
+/* --brown-background: #7F6A51 ;
+--brown-border: 1px solid #614F41;
+--brown-main-background: #cdc1b1;
+--brown-font-color:#ffffff; */
+
+/* blue  */
+/* --blue-background: rgb(55, 0, 90);
+--blue-border: 1px solid rgba(219, 111, 255, 0.34);
+--blue-main-background: rgb(76, 0, 124);
+--blue-font-color:#fff */
+
+/* pink */
+/* --pink-background: #ffaed1 ;
+--pink-border: 1px solid #F26BAC;
+--pink-main-background: #ffdbec;
+--pink-font-color:#000000; */
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+
+body {
+  background-color: var(--main-background);
+}

@@ -1,0 +1,317 @@
+import React, { useEffect, useRef, useState } from "react";
+import "./app.css";
+
+const App = () => {
+  const inpRef = useRef(null);
+  const [toggle, setToggle] = useState(true);
+  const [activeConvo, setActiveConvo] = useState(1);
+  const [Conversations, setConversations] = useState([
+    {
+      id: 1,
+      messages: [],
+    },
+  ]);
+
+  function toggleMenu() {
+    setToggle(!toggle);
+  }
+
+  function handleNewCovo() {
+    let newId = Conversations.length + 1;
+    setConversations([...Conversations, { id: newId, messages: [] }]);
+    setActiveConvo(newId);
+  }
+
+  function postMsg() {
+    const inputvalue = inpRef.current.value.trim();
+
+    if (!inputvalue) return;
+
+    const botResponse = "some response from bot";
+
+    setConversations((prev) =>
+      prev.map((convo) =>
+        convo.id === activeConvo
+          ? {
+              ...convo,
+              messages: [
+                ...convo.messages,
+                { user: inputvalue, bot: botResponse },
+              ],
+            }
+          : convo
+      )
+    );
+
+    inpRef.current.value = "";
+  }
+
+  function removeConvo(id) {
+    setConversations((prev) => {
+      const updatedConvo = prev.filter((convo) => convo.id !== id);
+
+      console.log(updatedConvo);
+
+      if (id == activeConvo) {
+        setActiveConvo(updatedConvo.length >0? updatedConvo[0].id : 1);
+        console.log(activeConvo)
+      }
+
+      return updatedConvo
+    });
+  }
+
+  const [theme, setTheme] = useState("theme1");
+
+  function changeTheme(e) {
+    let newTheme = e.target.value;
+    setTheme(newTheme);
+  }
+
+  useEffect(() => {
+    document.body.style.background = `var(--${theme}-main-background)`;
+  });
+
+  return (
+    <div className="container">
+      <div
+        className="menu"
+        style={{
+          width: toggle ? "60px" : "330px",
+          minWidth: toggle ? "60px" : "330px",
+          background: `var(--${theme}-background)`,
+          border: `var(--${theme}-border)`,
+        }}
+      >
+        <input type="checkbox" id="close" />
+        <div
+          className="hamburger"
+          style={{ color: `var(--${theme}-font-color)` }}
+        >
+          <label
+            htmlFor="close"
+            onClick={() => {
+              toggleMenu();
+            }}
+          >
+            -
+          </label>
+        </div>
+        <div className="options" style={{ left: toggle ? "-500px" : "0px" }}>
+          <div
+            className="new-convo"
+            onClick={() => {
+              handleNewCovo();
+            }}
+            style={{
+              background: `var(--${theme}-background)`,
+              border: `var(--${theme}-border)`,
+              color: `var(--${theme}-font-color)`,
+            }}
+          >
+            <i className="fa-solid fa-plus"></i>
+            <p>New Conversation</p>
+          </div>
+
+          <div className="prev-convo">
+            {Conversations.map((convo, index) => (
+              <label
+                htmlFor="close"
+                key={index}
+                onClick={() => {
+                  setActiveConvo(convo.id);
+                }}
+              >
+                <div
+                  className="prev-convo-items"
+                  style={{ color: `var(--${theme}-font-color)` }}
+                  onClick={() => {
+                    toggleMenu();
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: convo.id === activeConvo ? "bold" : "normal",
+                    }}
+                  >
+                    <i className="fa-solid fa-comments"></i>
+                    Conversation {convo.id}
+                  </div>
+                  <i
+                    className="fa-solid fa-trash"
+                    onClick={() => {
+                      removeConvo(convo.id);
+                    }}
+                  ></i>
+                </div>
+              </label>
+            ))}
+          </div>
+
+          <div
+            className="clear-convo"
+            onClick={() => {
+              setConversations([
+                {
+                  id: 1,
+                  messages: [],
+                },
+              ]);
+              setActiveConvo(1);
+            }}
+            style={{
+              background: `var(--${theme}-background)`,
+              border: `var(--${theme}-border)`,
+              color: `var(--${theme}-font-color)`,
+            }}
+          >
+            <i className="fa-solid fa-trash"></i>
+            <p>Clear Conversation</p>
+          </div>
+        </div>
+      </div>
+
+      {/* //zsdfaadsflahdnsf */}
+
+      <div className="right">
+        <div
+          className="msgArea"
+          style={{
+            background: `var(--${theme}-background)`,
+            border: `var(--${theme}-border)`,
+          }}
+        >
+          {Conversations.find((convo) => convo.id === activeConvo).messages.map(
+            (msg, index) => (
+              <React.Fragment key={index}>
+                <div className="user msg-field">
+                  <div className="img">
+                    <i className="fa-solid fa-user"></i>
+                    <i className="fa-solid fa-arrow-up"></i>
+                  </div>
+                  <p style={{ color: `var(--${theme}-font-color)` }}>
+                    {msg.user}
+                  </p>
+                </div>
+
+                <div className="bot msg-field">
+                  <div className="img">
+                    <i className="fa-solid fa-robot"></i>
+                    <i className="fa-solid fa-arrow-down"></i>
+                  </div>
+
+                  <p style={{ color: `var(--${theme}-font-color)` }}>
+                    {msg.bot}
+                  </p>
+                </div>
+              </React.Fragment>
+            )
+          )}
+        </div>
+
+        <div
+          className="inputbox"
+          style={{
+            background: `var(--${theme}-background)`,
+            border: `var(--${theme}-border)`,
+          }}
+        >
+          <input
+            type="text"
+            ref={inpRef}
+            style={{ color: `var(--${theme}-font-color)` }}
+            placeholder="Ask a question"
+          />
+          <div className="submit">
+            <i
+              className="fa-solid fa-paper-plane"
+              onClick={() => {
+                postMsg();
+              }}
+            ></i>
+          </div>
+        </div>
+
+        <div className="footer" style={{ color: `var(--${theme}-font-color)` }}>
+          <label htmlFor="check">
+            <input id="check" type="checkbox" />
+            <div
+              className="toggle"
+              style={{
+                background: `var(--${theme}-background)`,
+                border: `var(--${theme}-border)`,
+              }}
+            ></div>
+          </label>
+
+          <p>Web Access</p>
+
+          <div className="right-options"></div>
+
+          <div className="btn">
+            <button
+              style={{
+                background: `var(--${theme}-background)`,
+                border: `var(--${theme}-border)`,
+                color: `var(--${theme}-font-color)`,
+              }}
+            >
+              default
+            </button>
+          </div>
+
+          <div
+            className="themes"
+            style={{
+              background: `var(--${theme}-background)`,
+              border: `var(--${theme}-border)`,
+            }}
+          >
+            <input
+              type="radio"
+              name="theme"
+              value="theme1"
+              onClick={(e) => {
+                changeTheme(e);
+              }}
+            />
+            <input
+              type="radio"
+              name="theme"
+              value="theme2"
+              onClick={(e) => {
+                changeTheme(e);
+              }}
+            />
+            <input
+              type="radio"
+              name="theme"
+              value="theme3"
+              onClick={(e) => {
+                changeTheme(e);
+              }}
+            />
+            <input
+              type="radio"
+              name="theme"
+              value="theme4"
+              onClick={(e) => {
+                changeTheme(e);
+              }}
+            />
+            <input
+              type="radio"
+              name="theme"
+              value="theme5"
+              onClick={(e) => {
+                changeTheme(e);
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
