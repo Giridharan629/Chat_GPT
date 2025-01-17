@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./app.css";
-
 const App = () => {
   const inpRef = useRef(null);
   const [toggle, setToggle] = useState(true);
@@ -17,12 +16,15 @@ const App = () => {
   }
 
   function handleNewCovo() {
+    console.log("render")
     let newId = Conversations.length + 1;
     setConversations([...Conversations, { id: newId, messages: [] }]);
     setActiveConvo(newId);
   }
 
   function postMsg() {
+    console.log("render")
+
     const inputvalue = inpRef.current.value.trim();
 
     if (!inputvalue) return;
@@ -35,7 +37,7 @@ const App = () => {
           ? {
               ...convo,
               messages: [
-                ...convo.messages,
+                ...convo?.messages,
                 { user: inputvalue, bot: botResponse },
               ],
             }
@@ -47,17 +49,22 @@ const App = () => {
   }
 
   function removeConvo(id) {
+    console.log("render")
+
     setConversations((prev) => {
       const updatedConvo = prev.filter((convo) => convo.id !== id);
 
       console.log(updatedConvo);
 
       if (id == activeConvo) {
-        setActiveConvo(updatedConvo.length >0? updatedConvo[0].id : 1);
-        console.log(activeConvo)
+        console.log(updatedConvo);
+        setActiveConvo(() => {
+          updatedConvo.length > 0 ? updatedConvo[0].id : null;
+        });
+        console.log(activeConvo);
       }
 
-      return updatedConvo
+      return updatedConvo;
     });
   }
 
@@ -68,12 +75,18 @@ const App = () => {
     setTheme(newTheme);
   }
 
-  useEffect(() => {
-    document.body.style.background = `var(--${theme}-main-background)`;
-  });
+  // useEffect(() => {
+  //   document.body.style.background = `var(--${theme}-main-background)`;
+  // });
 
   return (
     <div className="container">
+      <div className="bg">
+        <video autoPlay muted loop>
+          <source src={`${theme}.mp4`} type="video/mp4"/>
+        </video>
+        <img src="" alt="" />
+      </div>
       <div
         className="menu"
         style={{
@@ -139,7 +152,8 @@ const App = () => {
                   </div>
                   <i
                     className="fa-solid fa-trash"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       removeConvo(convo.id);
                     }}
                   ></i>
@@ -181,8 +195,12 @@ const App = () => {
             border: `var(--${theme}-border)`,
           }}
         >
-          {Conversations.find((convo) => convo.id === activeConvo).messages.map(
-            (msg, index) => (
+          {Conversations?.length === 0 || !activeConvo ? (
+            <p>click New Conversation in the menu bar to start service 😊💕 </p>
+          ) : (
+            Conversations.find(
+              (convo) => convo?.id === activeConvo
+            )?.messages?.map((msg, index) => (
               <React.Fragment key={index}>
                 <div className="user msg-field">
                   <div className="img">
@@ -205,7 +223,7 @@ const App = () => {
                   </p>
                 </div>
               </React.Fragment>
-            )
+            ))
           )}
         </div>
 
