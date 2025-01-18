@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./app.css";
 
-
 const App = () => {
   const inpRef = useRef(null);
   const [toggle, setToggle] = useState(true);
@@ -51,6 +50,7 @@ const App = () => {
   }
 
   function removeConvo(id) {
+
     console.log("render");
 
     setConversations((prev) => {
@@ -79,7 +79,7 @@ const App = () => {
 
   useEffect(() => {
     // document.body.style.background = url({theme});
-    console.log(theme)
+    console.log(theme);
   });
 
   return (
@@ -185,8 +185,6 @@ const App = () => {
               </label>
             ))}
           </div>
-
-          
         </div>
       </div>
 
