@@ -11,13 +11,13 @@
   --theme1-main-background: #ffffff;
   --theme1-font-color: #ffffff;
 
-  --theme2-background: #ffaed1;
-  --theme2-border: 1px solid #f26bac;
-  --theme2-main-background: #ffdbec;
+  --theme2-background: #ffffff3e;
+  --theme2-border: 1px solid #ff8c0053;
+  --theme2-main-background: #ffffff;
   --theme2-font-color: #000000;
 
-  --theme3-background: rgb(55, 0, 90);
-  --theme3-border: 1px solid rgba(219, 111, 255, 0.34);
+  --theme3-background: #ffffff3e;
+  --theme3-border: 1px solid #ffffff70;
   --theme3-main-background: rgb(76, 0, 124);
   --theme3-font-color: #fff;
 }

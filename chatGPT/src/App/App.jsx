@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./app.css";
-import theme1 from "/theme1.jpg"
 
 
 const App = () => {
@@ -78,9 +77,10 @@ const App = () => {
     setTheme(newTheme);
   }
 
-  // useEffect(() => {
-  //   document.body.style.background = url({bag});
-  // });
+  useEffect(() => {
+    // document.body.style.background = url({theme});
+    console.log(theme)
+  });
 
   return (
     <div className="container">
@@ -88,7 +88,7 @@ const App = () => {
         {/* <video autoPlay muted loop>
           <source src={`${theme}.mp4`} type="video/mp4" />
         </video> */}
-        <img src={theme1} alt="" />
+        <img src={`${theme}.jpg`} alt="" />
       </div>
       <div
         className="menu"
