@@ -48,7 +48,8 @@
 }
 
 body {
-  background-color: var(--main-background);
+  /* background-color: var(--main-background); */
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {

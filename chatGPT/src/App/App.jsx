@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./app.css";
+import theme1 from "/theme1.jpg"
+
+
 const App = () => {
   const inpRef = useRef(null);
   const [toggle, setToggle] = useState(true);
@@ -76,16 +79,16 @@ const App = () => {
   }
 
   // useEffect(() => {
-  //   document.body.style.background = `var(--${theme}-main-background)`;
+  //   document.body.style.background = url({bag});
   // });
 
   return (
     <div className="container">
       <div className="bg">
-        <video autoPlay muted loop>
+        {/* <video autoPlay muted loop>
           <source src={`${theme}.mp4`} type="video/mp4" />
-        </video>
-        <img src="" alt="" />
+        </video> */}
+        <img src={theme1} alt="" />
       </div>
       <div
         className="menu"
