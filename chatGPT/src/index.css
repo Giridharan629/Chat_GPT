@@ -47,10 +47,10 @@
   font-family: "Poppins", serif;
 }
 
-body {
-  /* background-color: var(--main-background); */
+/* body {
+  background-color: var(--main-background);
   overflow: hidden;
-}
+} */
 
 ::-webkit-scrollbar {
   width: 7px;
