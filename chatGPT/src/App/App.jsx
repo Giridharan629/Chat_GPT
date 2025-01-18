@@ -16,14 +16,14 @@ const App = () => {
   }
 
   function handleNewCovo() {
-    console.log("render")
+    console.log("render");
     let newId = Conversations.length + 1;
     setConversations([...Conversations, { id: newId, messages: [] }]);
     setActiveConvo(newId);
   }
 
   function postMsg() {
-    console.log("render")
+    console.log("render");
 
     const inputvalue = inpRef.current.value.trim();
 
@@ -49,7 +49,7 @@ const App = () => {
   }
 
   function removeConvo(id) {
-    console.log("render")
+    console.log("render");
 
     setConversations((prev) => {
       const updatedConvo = prev.filter((convo) => convo.id !== id);
@@ -83,17 +83,17 @@ const App = () => {
     <div className="container">
       <div className="bg">
         <video autoPlay muted loop>
-          <source src={`${theme}.mp4`} type="video/mp4"/>
+          <source src={`${theme}.mp4`} type="video/mp4" />
         </video>
         <img src="" alt="" />
       </div>
       <div
         className="menu"
         style={{
-          width: toggle ? "60px" : "330px",
-          minWidth: toggle ? "60px" : "330px",
+          width: toggle ? "40px" : "300px",
+          minWidth: toggle ? "40px" : "300px",
           background: `var(--${theme}-background)`,
-          border: `var(--${theme}-border)`,
+          borderRight: `var(--${theme}-border)`,
         }}
       >
         <input type="checkbox" id="close" />
@@ -126,42 +126,6 @@ const App = () => {
             <p>New Conversation</p>
           </div>
 
-          <div className="prev-convo">
-            {Conversations.map((convo, index) => (
-              <label
-                htmlFor="close"
-                key={index}
-                onClick={() => {
-                  setActiveConvo(convo.id);
-                }}
-              >
-                <div
-                  className="prev-convo-items"
-                  style={{ color: `var(--${theme}-font-color)` }}
-                  onClick={() => {
-                    toggleMenu();
-                  }}
-                >
-                  <div
-                    style={{
-                      fontWeight: convo.id === activeConvo ? "bold" : "normal",
-                    }}
-                  >
-                    <i className="fa-solid fa-comments"></i>
-                    Conversation {convo.id}
-                  </div>
-                  <i
-                    className="fa-solid fa-trash"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeConvo(convo.id);
-                    }}
-                  ></i>
-                </div>
-              </label>
-            ))}
-          </div>
-
           <div
             className="clear-convo"
             onClick={() => {
@@ -182,6 +146,44 @@ const App = () => {
             <i className="fa-solid fa-trash"></i>
             <p>Clear Conversation</p>
           </div>
+
+          <div className="prev-convo">
+            {Conversations.map((convo, index) => (
+              <label
+                htmlFor="close"
+                key={index}
+                onClick={() => {
+                  setActiveConvo(convo.id);
+                }}
+              >
+                <div
+                  className="prev-convo-items"
+                  style={{ color: `var(--${theme}-font-color)` }}
+                >
+                  <div
+                    style={{
+                      fontWeight: convo.id === activeConvo ? "bold" : "normal",
+                    }}
+                    onClick={() => {
+                      toggleMenu();
+                    }}
+                  >
+                    <i className="fa-solid fa-comments"></i>
+                    Conversation {convo.id}
+                  </div>
+                  <i
+                    className="fa-solid fa-trash"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeConvo(convo.id);
+                    }}
+                  ></i>
+                </div>
+              </label>
+            ))}
+          </div>
+
+          
         </div>
       </div>
 
@@ -266,7 +268,7 @@ const App = () => {
 
           <div className="right-options"></div>
 
-          <div className="btn">
+          {/* <div className="btn">
             <button
               style={{
                 background: `var(--${theme}-background)`,
@@ -276,7 +278,7 @@ const App = () => {
             >
               default
             </button>
-          </div>
+          </div> */}
 
           <div
             className="themes"
