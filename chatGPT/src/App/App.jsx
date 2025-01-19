@@ -50,7 +50,6 @@ const App = () => {
   }
 
   function removeConvo(id) {
-
     console.log("render");
 
     setConversations((prev) => {
@@ -90,11 +89,14 @@ const App = () => {
         </video> */}
         <img src={`${theme}.jpg`} alt="" />
       </div>
+      <div className="header">
+        <h1 style={{ color: `var(--${theme}-font-color)` }}>Chat Assistant</h1>
+      </div>
       <div
         className="menu"
         style={{
-          width: toggle ? "40px" : "300px",
-          minWidth: toggle ? "40px" : "300px",
+          width: toggle ? "0px" : "270px",
+          minWidth: toggle ? "0px" : "270px",
           background: `var(--${theme}-background)`,
           borderRight: `var(--${theme}-border)`,
         }}
@@ -102,7 +104,7 @@ const App = () => {
         <input type="checkbox" id="close" />
         <div
           className="hamburger"
-          style={{ color: `var(--${theme}-font-color)` }}
+          style={{ color: `var(--${theme}-font-color)`, backdropFilter:"blur(10px)" }}
         >
           <label
             htmlFor="close"
@@ -199,7 +201,11 @@ const App = () => {
           }}
         >
           {Conversations?.length === 0 || !activeConvo ? (
-            <p>click New Conversation in the menu bar to start service 😊💕 </p>
+            <>
+              <h2 style={{ color: `var(--${theme}-font-color)` }}>
+                click New Conversation in the menu bar to start service 😊💕{" "}
+              </h2>
+            </>
           ) : (
             Conversations.find(
               (convo) => convo?.id === activeConvo
@@ -229,47 +235,50 @@ const App = () => {
             ))
           )}
         </div>
-
-        <div
-          className="inputbox"
-          style={{
-            background: `var(--${theme}-background)`,
-            border: `var(--${theme}-border)`,
-          }}
-        >
-          <input
-            type="text"
-            ref={inpRef}
-            style={{ color: `var(--${theme}-font-color)` }}
-            placeholder="Ask a question"
-          />
-          <div className="submit">
-            <i
-              className="fa-solid fa-paper-plane"
-              onClick={() => {
-                postMsg();
-              }}
-            ></i>
+        <div className="footer-items">
+          <div
+            className="inputbox"
+            style={{
+              background: `var(--${theme}-background)`,
+              border: `var(--${theme}-border)`,
+            }}
+          >
+            <input
+              type="text"
+              ref={inpRef}
+              style={{ color: `var(--${theme}-font-color)` }}
+              placeholder="Ask a question"
+            />
+            <div className="submit">
+              <i
+                className="fa-solid fa-paper-plane"
+                onClick={() => {
+                  postMsg();
+                }}
+              ></i>
+            </div>
           </div>
-        </div>
 
-        <div className="footer" style={{ color: `var(--${theme}-font-color)` }}>
-          <label htmlFor="check">
-            <input id="check" type="checkbox" />
-            <div
-              className="toggle"
-              style={{
-                background: `var(--${theme}-background)`,
-                border: `var(--${theme}-border)`,
-              }}
-            ></div>
-          </label>
+          <div
+            className="footer"
+            style={{ color: `var(--${theme}-font-color)` }}
+          >
+            <label htmlFor="check">
+              <input id="check" type="checkbox" />
+              <div
+                className="toggle"
+                style={{
+                  background: `var(--${theme}-background)`,
+                  border: `var(--${theme}-border)`,
+                }}
+              ></div>
+            </label>
 
-          <p>Web Access</p>
+            <p>Web Access</p>
 
-          <div className="right-options"></div>
+            <div className="right-options"></div>
 
-          {/* <div className="btn">
+            {/* <div className="btn">
             <button
               style={{
                 background: `var(--${theme}-background)`,
@@ -281,53 +290,54 @@ const App = () => {
             </button>
           </div> */}
 
-          <div
-            className="themes"
-            style={{
-              background: `var(--${theme}-background)`,
-              border: `var(--${theme}-border)`,
-            }}
-          >
-            <input
-              type="radio"
-              name="theme"
-              value="theme1"
-              onClick={(e) => {
-                changeTheme(e);
+            <div
+              className="themes"
+              style={{
+                background: `var(--${theme}-background)`,
+                border: `var(--${theme}-border)`,
               }}
-            />
-            <input
-              type="radio"
-              name="theme"
-              value="theme2"
-              onClick={(e) => {
-                changeTheme(e);
-              }}
-            />
-            <input
-              type="radio"
-              name="theme"
-              value="theme3"
-              onClick={(e) => {
-                changeTheme(e);
-              }}
-            />
-            <input
-              type="radio"
-              name="theme"
-              value="theme4"
-              onClick={(e) => {
-                changeTheme(e);
-              }}
-            />
-            <input
-              type="radio"
-              name="theme"
-              value="theme5"
-              onClick={(e) => {
-                changeTheme(e);
-              }}
-            />
+            >
+              <input
+                type="radio"
+                name="theme"
+                value="theme1"
+                onClick={(e) => {
+                  changeTheme(e);
+                }}
+              />
+              <input
+                type="radio"
+                name="theme"
+                value="theme2"
+                onClick={(e) => {
+                  changeTheme(e);
+                }}
+              />
+              <input
+                type="radio"
+                name="theme"
+                value="theme3"
+                onClick={(e) => {
+                  changeTheme(e);
+                }}
+              />
+              <input
+                type="radio"
+                name="theme"
+                value="theme4"
+                onClick={(e) => {
+                  changeTheme(e);
+                }}
+              />
+              <input
+                type="radio"
+                name="theme"
+                value="theme5"
+                onClick={(e) => {
+                  changeTheme(e);
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
