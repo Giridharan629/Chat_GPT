@@ -4,6 +4,7 @@ import "./app.css";
 const App = () => {
   const inpRef = useRef(null);
   const [toggle, setToggle] = useState(true);
+  const [theme, setTheme] = useState("theme1");
   const [activeConvo, setActiveConvo] = useState(1);
   const [Conversations, setConversations] = useState([
     {
@@ -24,13 +25,33 @@ const App = () => {
   }
 
   function postMsg() {
-    console.log("render");
 
     const inputvalue = inpRef.current.value.trim();
 
     if (!inputvalue) return;
 
-    const botResponse = "some response from bot";
+    let botResponse = "some response from bot";
+
+    if (inputvalue == "Hi" || inputvalue == "hi"| inputvalue == "HI") {
+      botResponse = "Hi! How's it going?";
+    } else if (
+      inputvalue == "how are you?" ||
+      inputvalue == "How are you?" ||
+      inputvalue == "how are you ?" ||
+      inputvalue == "How are you ?"||
+      inputvalue == "How are you" ||
+      inputvalue == "how are you" ||
+      inputvalue == "HOW ARE YOU?" ||
+      inputvalue == "HOW ARE YOU ?"
+    ) {
+      botResponse = "I'm great! Thanks for asking. How about you?";
+    }else if(inputvalue)
+    {}
+    else{
+      botResponse = `Rome wasn't built in a day, and neither was I. I can answers for only two questions. Come back later-I might learn a third answer! 😅 
+      
+      if you are intelligent find the two questions that i know 😁`
+    }
 
     setConversations((prev) =>
       prev.map((convo) =>
@@ -69,8 +90,6 @@ const App = () => {
     });
   }
 
-  const [theme, setTheme] = useState("theme1");
-
   function changeTheme(e) {
     let newTheme = e.target.value;
     setTheme(newTheme);
@@ -78,7 +97,6 @@ const App = () => {
 
   useEffect(() => {
     // document.body.style.background = url({theme});
-    console.log(theme);
   });
 
   return (
