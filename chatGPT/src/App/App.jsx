@@ -104,7 +104,9 @@ const App = () => {
         <input type="checkbox" id="close" />
         <div
           className="hamburger"
-          style={{ color: `var(--${theme}-font-color)`, backdropFilter:"blur(10px)" }}
+          style={{
+            color: `var(--${theme}-font-color)`
+          }}
         >
           <label
             htmlFor="close"
