@@ -258,11 +258,17 @@ video {
   position: absolute;
   font-size: 50px;
   font-weight: 200;
-  transition: 0.3s;
   cursor: pointer;
   top: -49%;
   left: 55%;
   transform: translate(-50%);
+  transition: .5s;
+}
+
+.hamburger label:hover, .hamburger label:active{
+  outline: none; /* Prevent focus outline */
+  background-color: transparent; /* Ensure no background highlight */
+  box-shadow: none;
 }
 
 #close {
@@ -273,7 +279,10 @@ video {
   content: "-";
   position: absolute;
   top: 5.5px;
-  transition: 0.3s;
+  transition: .5s;
+  outline: none; /* Prevent focus outline */
+  background-color: transparent; /* Ensure no background highlight */
+  box-shadow: none;
 }
 
 .hamburger label::after {
@@ -281,7 +290,10 @@ video {
   position: absolute;
   left: 0;
   bottom: 6px;
-  transition: 0.3s;
+  transition: .5s;
+  outline: none; /* Prevent focus outline */
+  background-color: transparent; /* Ensure no background highlight */
+  box-shadow: none;
 }
 
 #close:checked ~ .hamburger label::before {
@@ -340,7 +352,7 @@ video {
 }
 
 .prev-convo-items {
-  display: flex;
+  /* display: grid; */
   align-items: center;
   justify-content: space-between;
   /* padding: 10px; */
@@ -355,6 +367,15 @@ video {
   padding: 10px;
 }
 
+.prev-convo-items .fa-trash{
+  height: 33px;
+  width: 33px;
+  font-size: 20px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
 .prev-convo-items:hover {
   background-color: #ffffff2c;
 }
@@ -362,7 +383,6 @@ video {
 .prev-convo div {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .clear-convo {
