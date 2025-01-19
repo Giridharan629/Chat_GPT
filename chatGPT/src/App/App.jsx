@@ -105,7 +105,7 @@ const App = () => {
         <div
           className="hamburger"
           style={{
-            color: `var(--${theme}-font-color)`
+            color: `var(--${theme}-font-color)`,
           }}
         >
           <label
@@ -253,6 +253,9 @@ const App = () => {
             />
             <div className="submit">
               <i
+                style={{
+                  color: `var(--${theme}-font-color)`,
+                }}
                 className="fa-solid fa-paper-plane"
                 onClick={() => {
                   postMsg();

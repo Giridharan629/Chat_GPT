@@ -25,6 +25,11 @@
   --theme4-border: 1px solid #ffc8c870;
   --theme4-main-background: rgb(76, 0, 124);
   --theme4-font-color: #ffd4d4;
+
+  --theme5-background: #ffffff3e;
+  --theme5-border: 1px solid #00252b53;
+  --theme5-main-background: #ffffff;
+  --theme5-font-color: #000000;
 }
 
 /* brown */
