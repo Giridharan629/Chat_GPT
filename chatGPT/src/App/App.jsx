@@ -45,8 +45,7 @@ const App = () => {
       inputvalue == "HOW ARE YOU ?"
     ) {
       botResponse = "I'm great! Thanks for asking. How about you?";
-    }else if(inputvalue)
-    {}
+    }
     else{
       botResponse = `Rome wasn't built in a day, and neither was I. I can answers for only two questions. Come back later-I might learn a third answer! 😅 
       
