@@ -1,7 +1,13 @@
 .container {
   height: 100vh;
-  display: flex;
   position: relative;
+}
+
+.header {
+  padding: 1rem 1rem 0px;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
 }
 
 .bg {
@@ -12,12 +18,11 @@
   z-index: -10;
 }
 
-.bg img{
-    /* width: 100%; */ 
-    height: 100%;
-    filter: blur(100px);
-    scale: 2;
-
+.bg img {
+  /* width: 100%; */
+  height: 100%;
+  filter: blur(100px);
+  scale: 2;
 }
 
 video {
@@ -34,23 +39,39 @@ video {
 .right {
   padding: 1rem;
   width: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 735px;
-  margin-left: 2.5rem;
+  /* margin-left: 2.5rem; */
 }
 
 .msgArea {
   overflow-y: scroll;
+  min-height: fit-content;
+  max-height: 70vh;
+  transition: 0.3s;
+  border-radius: 10px;
 }
 
-.msgArea,
 .inputbox {
   /* background-color: var(--background); */
   padding: 1rem;
   border-radius: 10px;
   /* border: var(--border); */
+}
+
+.msgArea:has(.bot) {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.msgArea h2{
+  text-align: center;
+  padding: 1rem;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .img {
@@ -74,10 +95,6 @@ video {
   transform: translate(50%, 50%) rotate(45deg);
   text-shadow: 0px 0px 3px #fff, 0px 0px 4px #fff, 0px 0px 5px #fff,
     0px 0px 6px #fff, 0px 0px 7px #fff;
-}
-
-.msgArea {
-  height: 78vh;
 }
 
 .msg-field {
@@ -133,7 +150,7 @@ video {
   gap: 15px;
   align-items: center;
   justify-content: space-between;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   /* color: var(--font-color); */
   height: 35px;
   position: relative;
@@ -200,30 +217,50 @@ video {
 
 .menu {
   /* background-color: var(--background); */
-  position: relative;
+  /* position: relative; */
   height: 100vh;
-  padding: 1rem;
+  /* padding: 1rem; */
+  position: absolute;
+  left: -1px;
+  top: 0;
   /* border-right: var(--border); */
-  z-index: 100px;
+  z-index: 100;
   transition: 0.3s ease;
   backdrop-filter: blur(10px);
   user-select: none;
 }
 
+.menu:has(input[type="checkbox"]:checked) {
+  left: 0;
+  padding: 1rem;
+  padding-bottom: 0px;
+}
+
 .hamburger {
   /* color: var(--font-color); */
   position: absolute;
-  right: 0.3rem;
+  right: -22px;
+  transform: translate(45%);
+  border: 1px solid #ffffff7b;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   display: flex;
-  top: 0rem;
+  top: 20px;
+  background-color: #ffffff3e;
+  height: 39px;
+  width: 39px;
+  transition: 0.3s;
 }
 
 .hamburger label {
-  position: relative;
+  position: absolute;
   font-size: 50px;
   font-weight: 200;
   transition: 0.3s;
   cursor: pointer;
+  top: -49%;
+  left: 55%;
+  transform: translate(-50%);
 }
 
 #close {
@@ -233,7 +270,7 @@ video {
 .hamburger label::before {
   content: "-";
   position: absolute;
-  top: 6px;
+  top: 5.5px;
   transition: 0.3s;
 }
 
@@ -247,14 +284,20 @@ video {
 
 #close:checked ~ .hamburger label::before {
   transform: rotate(90deg);
-  top: 1px;
+  top: 1.5px;
   left: -4px;
 }
 
+#close:checked ~ .hamburger {
+  background-color: transparent;
+  border: none;
+}
+
 #close:checked ~ .hamburger label {
-  transform: rotate(45deg);
-  bottom: 5;
-  left: 2px;
+  transform: rotate(45deg) translate(-50%, -50%);
+  top: 20px;
+  left: -50px;
+  z-index: 999;
 }
 
 #close:checked ~ .hamburger label::after {
@@ -262,7 +305,7 @@ video {
 }
 
 .options {
-  width: 250px;
+  width: 200px;
   position: relative;
   transition: 0.3s ease;
 }
@@ -279,14 +322,15 @@ video {
   /* color: var(--font-color); */
 }
 
-.new-convo, .prev-convo, .clear-convo{
-    
+.new-convo,
+.prev-convo,
+.clear-convo {
   font-size: 13px;
   width: 95%;
 }
 
-.prev-convo{
-    margin-top: 1rem;
+.prev-convo {
+  margin-top: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 80vh;
@@ -305,7 +349,7 @@ video {
   cursor: pointer;
 }
 
-.prev-convo-items i{
+.prev-convo-items i {
   padding: 10px;
 }
 
@@ -344,10 +388,9 @@ video {
 }
 
 @media screen and (max-width: 425px) {
-
-    .footer{
-        height: 30px;
-    }
+  .footer {
+    height: 30px;
+  }
 
   .toggle {
     height: 20px;
@@ -381,15 +424,16 @@ video {
     font-size: 10px;
   }
 
-
   .inputbox {
     height: 40px;
   }
 
-  .msgArea .user p, .bot p{
+  .msgArea .user p,
+  .bot p {
     font-size: 13px;
   }
-  .user .img,.bot .img{
+  .user .img,
+  .bot .img {
     height: 30px;
     width: 30px;
     max-width: 30px;
@@ -397,30 +441,32 @@ video {
     font-size: 12px;
   }
 
-  .submit i{
+  .submit i {
     font-size: 20px;
   }
 
-  .inputbox{
-    padding: .5rem;
+  .inputbox {
+    padding: 0.5rem;
   }
 
-  .inputbox input{
+  .inputbox input {
     font-size: 13px;
   }
 
-  .menu .new-convo, .prev-convo, .clear-convo{
+  .menu .new-convo,
+  .prev-convo,
+  .clear-convo {
     font-size: 13px;
     width: 200px;
   }
+
+  .right {
+    margin: 0px;
+  }
 }
 
-
-@media screen and (min-width:670px) {
-
-    .right{
-        margin: auto;
-        padding-left: 3.5rem;
-    }
-    
+@media screen and (min-width: 670px) {
+  .right {
+    margin: auto;
+  }
 }
