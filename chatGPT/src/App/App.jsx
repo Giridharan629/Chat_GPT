@@ -19,37 +19,35 @@ const App = () => {
 
   function handleNewCovo() {
     console.log("render");
-    let newId = Conversations.length + 1;
+    let newId = Conversations.length >0 ? Math.max(...Conversations.map((convo)=> convo.id))+1: 1;
     setConversations([...Conversations, { id: newId, messages: [] }]);
     setActiveConvo(newId);
   }
 
   function postMsg() {
-
     const inputvalue = inpRef.current.value.trim();
 
     if (!inputvalue) return;
 
     let botResponse = "some response from bot";
 
-    if (inputvalue == "Hi" || inputvalue == "hi"| inputvalue == "HI") {
+    if (inputvalue == "Hi" || (inputvalue == "hi") | (inputvalue == "HI")) {
       botResponse = "Hi! How's it going?";
     } else if (
       inputvalue == "how are you?" ||
       inputvalue == "How are you?" ||
       inputvalue == "how are you ?" ||
-      inputvalue == "How are you ?"||
+      inputvalue == "How are you ?" ||
       inputvalue == "How are you" ||
       inputvalue == "how are you" ||
       inputvalue == "HOW ARE YOU?" ||
       inputvalue == "HOW ARE YOU ?"
     ) {
       botResponse = "I'm great! Thanks for asking. How about you?";
-    }
-    else{
+    } else {
       botResponse = `Rome wasn't built in a day, and neither was I. I can answers for only two questions. Come back later-I might learn a third answer! 😅 
       
-      if you are intelligent find the two questions that i know 😁`
+      if you are intelligent find the two questions that i know 😁`;
     }
 
     setConversations((prev) =>
@@ -173,37 +171,41 @@ const App = () => {
 
           <div className="prev-convo">
             {Conversations.map((convo, index) => (
-              <label
-                htmlFor="close"
-                key={index}
-                onClick={() => {
-                  setActiveConvo(convo.id);
-                }}
+              <div
+                className="prev-convo-items"
+                style={{ color: `var(--${theme}-font-color)` }}
               >
-                <div
-                  className="prev-convo-items"
-                  style={{ color: `var(--${theme}-font-color)` }}
+                <label
+                  htmlFor="close"
+                  key={index}
+                  onClick={() => {
+                    setActiveConvo(convo.id);
+                  }}
                 >
-                  <div
-                    style={{
-                      fontWeight: convo.id === activeConvo ? "bold" : "normal",
-                    }}
-                    onClick={() => {
-                      toggleMenu();
-                    }}
-                  >
-                    <i className="fa-solid fa-comments"></i>
-                    Conversation {convo.id}
+                  <div>
+                    <div
+                      style={{
+                        fontWeight:
+                          convo.id === activeConvo ? "bold" : "normal",
+                        cursor:"pointer"
+                      }}
+                      onClick={() => {
+                        toggleMenu();
+                      }}
+                    >
+                      <i className="fa-solid fa-comments"></i>
+                      Conversation {convo.id}
+                    </div>
                   </div>
-                  <i
-                    className="fa-solid fa-trash"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeConvo(convo.id);
-                    }}
-                  ></i>
-                </div>
-              </label>
+                </label>
+                <i
+                  className="fa-solid fa-trash"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeConvo(convo.id);
+                  }}
+                ></i>
+              </div>
             ))}
           </div>
         </div>
